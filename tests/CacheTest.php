@@ -3,7 +3,7 @@
 	namespace Parcel\Cache\Tests;
 
 	use Parcel\Cache\Cache;
-	use Parcel\Cache\Storage\MockStorage;
+	use Parcel\Cache\Storage\InMemoryStorage;
 	use PHPUnit\Framework\TestCase;
 
 	class CacheTest extends TestCase
@@ -15,7 +15,7 @@
 		 * @return Cache
 		 */
 		protected function getMockedCache() {
-			return new Cache(new MockStorage());
+			return new Cache(new InMemoryStorage());
 		}
 
 		/**

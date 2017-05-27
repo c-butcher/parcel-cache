@@ -5,17 +5,26 @@
 	use Parcel\Cache\CacheData;
 
 	/**
-	 * Class MockStorage
-	 *
-	 * This class simulates data being stored in the cache for testing purposes.
+	 * Class InMemoryStorage
 	 *
 	 * @package Parcel\Cache\Storage
+	 * @version 1.0.0
 	 */
-	class MockStorage implements CacheStorageInterface {
-		protected $_data;
+	class InMemoryStorage implements CacheStorageInterface {
+		/**
+		 * The cached data.
+		 *
+		 * @var array
+		 */
+		protected $_cache;
 
+		/**
+		 * InMemoryStorage constructor.
+		 *
+		 * @param array $storage
+		 */
 		public function __construct(array $storage = array()) {
-			$this->_data = $storage;
+			$this->_cache = $storage;
 		}
 
 		/**
@@ -26,7 +35,7 @@
 		 * @return bool
 		 */
 		public function exists($key) {
-			return isset($this->_data[$key]);
+			return isset($this->_cache[$key]);
 		}
 
 		/**
@@ -54,7 +63,7 @@
 				return null;
 			}
 
-			return $this->_data[$key];
+			return $this->_cache[$key];
 		}
 
 		/**
@@ -63,8 +72,8 @@
 		 * @return bool
 		 */
 		public function delete($key) {
-			if (isset($this->_data[$key])) {
-				unset($this->_data[$key]);
+			if (isset($this->_cache[$key])) {
+				unset($this->_cache[$key]);
 			}
 
 			return true;
@@ -89,8 +98,8 @@
 				return false;
 			}
 
-			$this->_data[$data->getKey()] = $data;
+			$this->_cache[$data->getKey()] = $data;
 
-			return $this->_data[$data->getKey()];
+			return $this->_cache[$data->getKey()];
 		}
 	}
